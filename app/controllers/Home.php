@@ -1,7 +1,7 @@
 <?php
 
 class Home extends Controller{
-  public function index($username='test'){
+  public function index($username='usernameHere'){
     $data['title']='Homepage';
     $data['username']=$username;
     $this->view('home/index',$data);
