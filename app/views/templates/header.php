@@ -10,4 +10,3 @@
   </head>
   <body>
     <div class="container-fluid h-100">
-      <div class="card w-75 mx-auto mt-5">
