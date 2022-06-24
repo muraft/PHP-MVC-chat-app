@@ -2,6 +2,7 @@
 
 class Home extends Controller{
   public function index(){
+    if(!isset($_SESSION['user']))header('Location:home/register');
     $data['title']='Homepage';
     $data['user']=$this->model('User')->get_user_info();
     $this->view('templates/header',$data);
@@ -11,7 +12,7 @@ class Home extends Controller{
   public function register(){
     $data['title']='Register';
     $this->view('templates/header',$data);
-    $this->view('home/index',$data);
+    $this->view('home/register',$data);
     $this->view('templates/footer',$data);
   }
   public function login(){
