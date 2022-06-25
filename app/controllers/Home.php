@@ -9,15 +9,19 @@ class Home extends Controller{
     $this->view('home/index',$data);
     $this->view('templates/footer');
   }
-  public function register($filled=false){
-    $data['errors']=join(',<br>',($filled?$this->model('User')->register($_POST):[]));
+  public function register(){
+    $data['errors']=$_POST?$this->model('User')->register($_POST):[];
+    if(isset($_SESSION['user']))header('Location:'.BASEURL);
     $data['title']='Register';
+    $data['username']=$_POST['username']??'';
     $this->view('templates/header',$data);
     $this->view('home/register',$data);
     $this->view('templates/footer');
   }
-  public function login($filled=false){
-    $data['errors']=join('.<br>',($filled?$this->model('User')->login($_POST):[]));
+  public function login(){
+    $data['errors']=$_POST?$this->model('User')->login($_POST):[];
+    if(isset($_SESSION['user']))header('Location:'.BASEURL);
+    $data['username']=$_POST['name']??'';
     $data['title']='Log in';
     $this->view('templates/header',$data);
     $this->view('home/login',$data);

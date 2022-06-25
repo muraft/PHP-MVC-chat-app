@@ -1,28 +1,27 @@
 <?php
 
 class Database{
-  private $host=DB_HOST,$user=DB_USER,$pass=DB_PASS,$name=DB_NAME;
-  private $dbh,$statement;
+  private static $dbh,$statement;
 
   public function __construct(){
-    $dsn='mysql:host='.$this->host.';dbname='.$this->name;
-    $option=[
-      PDO::ATTR_PERSISTENT=>true,
-      PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION
-    ];
+    $dsn='mysql:host='.DB_HOST.';dbname='.DB_NAME;
 
     try{
-      $this->dbh=new PDO($dsn,$this->user,$this->pass,$option);
+      self::$dbh=new PDO($dsn,DB_USER,DB_PASS,[
+        PDO::ATTR_PERSISTENT=>true,
+        PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION
+      ]);
     }catch(PDOException $e){
       die($e->getMessage());
     }
   }
 
-  private function query($query){
-    $this->statement=$this->dbh->prepare($query);
+  private static function query($query){
+    self::$statement=self::$dbh->prepare($query);
   }
 
-  private function bind($param,$value,$type=null){
+  private static function bind($param,$value,$type=null){
+    echo $type;
     if(is_null($type)){
       switch(true){
         case is_int($value):
@@ -38,38 +37,38 @@ class Database{
           $type=PDO::PARAM_STR;
       }
     }
-    $this->statement->bindValue($param,$value,$type);
+    self::$statement->bindValue($param,$value,$type);
   }
 
-  private function execute(){
-    $this->statement->execute();
+  private static function execute(){
+    self::$statement->execute();
   }
 
-  private function rowCount(){
-    $this->statement->rowCount();
+  private static function rowCount(){
+    return self::$statement->rowCount();
   }
 
-  public function insert($table,$data){
+  public static function insert($table,$data){
     $column=[];
     foreach ($data as $key => $value) {
       $column[]=$key;
     }
 
-    $this->query(
+    self::query(
       'INSERT INTO '
       .$table.
       ' ('
-      .join($column,',').
+      .join(',',$column).
       ') VALUES (:'
-      .join($column,':,').
+      .join(',:',$column).
       ');'
     );
 
     foreach ($column as $c) {
-        $this->bind(':'.$c,$data[$c]);
+      self::bind(':'.$c,$data[$c]);
     }
 
-    $this->execute();
-    return $this->rowCount();
+    self::execute();
+    return self::rowCount();
   }
 }

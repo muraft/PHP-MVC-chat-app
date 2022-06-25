@@ -1,6 +1,5 @@
 <?php
 class User{
-  private $db;
   private $user_info=[
     "id"=>5,
     "name"=>"usernameHere",
@@ -8,15 +7,12 @@ class User{
     "color"=>"green",
   ];
 
-  public function __construct(){
-    $this->db = new Database();
-  }
 
   public function register($data){
     $errors=[];
-    $username=htmlspecialchars($data['username']);
-    $password=htmlspecialchars($data['password']);
-    $password2=htmlspecialchars($data['password2']);
+    $username=htmlspecialchars($data['username']??'');
+    $password=htmlspecialchars($data['password']??'');
+    $password2=htmlspecialchars($data['password2']??'');
 
     if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/',$username))$errors[]="Username can't contain symbols";
     if(empty($username))$errors[]="Username must not be empty";
@@ -24,13 +20,25 @@ class User{
     if(empty($password))$errors[]="Password must not be empty";
     if($password!==$password2)$errors[]="Password does not match";
 
-    return $errors;
+    if($errors)return $errors;
+
+    if(Database::insert('user',[
+      'name' => $username,
+      'password' => password_hash($password,PASSWORD_DEFAULT)
+    ])){
+      $_SESSION['user']=$username;
+      return NULL;
+    }
+    else{
+      return $errors;
+    }
+
   }
 
   public function login($data){
     $errors=[];
-    $username=htmlspecialchars($data['username']);
-    $password=htmlspecialchars($data['password']);
+    $username=htmlspecialchars($data['username']??'');
+    $password=htmlspecialchars($data['password']??'');
 
     if(empty($username))$errors[]="Username must not be empty";
     if(empty($password))$errors[]="Password must not be empty";

@@ -4,12 +4,13 @@
   </div>
   <div class="card-body text-center">
     <h3 class="card-title text-primary"><i class="bi bi-pencil-square"></i> Register</h3>
-    <div class="border border-danger text-danger w-75 mx-auto mb-3 d-<?=$data['errors']?'block':'none'?>">
-      <?=$data['errors']?>
+    <div class="border border-danger text-danger mx-auto mb-3 d-<?=$data['errors']?'block':'none'?>">
+      <?=join('.<br>',$data['errors'])?>
     </div>
-    <form method="post" action="<?=BASEURL.'/home/register/filled'?>">
+
+    <form method="post" action="">
       <div class="form-floating w-md-50  mb-3 mx-auto">
-      <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?=$_POST['username']??''?>" required>
+      <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?=$data['username']?>" required>
       <label for="username"><i class="bi bi-person"></i> Username</label>
       </div>
 
