@@ -19,6 +19,7 @@ class User{
     if(strlen($username)<3)$errors[]="Username must contain more than 2 characters";
     if(empty($password))$errors[]="Password must not be empty";
     if($password!==$password2)$errors[]="Password does not match";
+    if(count(Database::get('user','*',"name='".$username."' LIMIT 1",true)))$errors[]="Username already exists";
 
     if($errors)return $errors;
 
@@ -26,7 +27,7 @@ class User{
       'name' => $username,
       'password' => password_hash($password,PASSWORD_DEFAULT)
     ])){
-      $_SESSION['user']=$username;
+      $_SESSION['id']=Database::get('user','id',"name = '".$username."'")['id'];
       return NULL;
     }
     else{
@@ -47,6 +48,6 @@ class User{
   }
 
   public function get_user_info(){
-    return $this->user_info;
+    return Database::get('user','*',"id='".$_SESSION['id']."'");
   }
 }

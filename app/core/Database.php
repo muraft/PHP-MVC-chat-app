@@ -48,6 +48,12 @@ class Database{
     return self::$statement->rowCount();
   }
 
+  public static function get($table,$content,$condition,$all=false){
+    self::query('SELECT '.$content.' FROM '.$table.' '.($condition?" WHERE ".$condition:"").";");
+    self::execute();
+    return $all?self::$statement->fetchAll(PDO::FETCH_ASSOC):self::$statement->fetch(PDO::FETCH_ASSOC);
+  }
+
   public static function insert($table,$data){
     $column=[];
     foreach ($data as $key => $value) {
