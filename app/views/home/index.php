@@ -1,11 +1,9 @@
 <div class="card w-75 mx-auto mt-5">
   <div class="card-header">
-    <h6>
-      <font color="<?=$data['user']['color']?>">
-        <i class="bi bi-<?=$data['user']['icon']?>"></i>
-        <?=$data['user']['name'].'#'.$data['user']['id']?>
-      </font>
-    </h6>
+    <font color="<?=$data['user']['color']?>">
+      <i class="bi bi-<?=$data['user']['icon']?>"></i>
+      <?=$data['user']['name'].'#'.$data['user']['id']?>
+    </font>
   </div>
   <div class="card-body text-center">
     <h1 class="card-title text-primary">MuRafT Chat</h1>
