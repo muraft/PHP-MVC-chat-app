@@ -1,12 +1,9 @@
 <?php
 class User{
-  private $user_info=[
-    "id"=>5,
-    "name"=>"usernameHere",
-    "icon"=>"person-circle",
-    "color"=>"green",
-  ];
-
+  private function success($username) {
+    $_SESSION['id']=Database::get('user','id',"name = '".$username."'")['id'];
+    return NULL;
+  }
 
   public function register($data){
     $errors=[];
@@ -20,20 +17,15 @@ class User{
     if(empty($password))$errors[]="Password must not be empty";
     if($password!==$password2)$errors[]="Password does not match";
     if(count(Database::get('user','*',"name='".$username."' LIMIT 1",true)))$errors[]="Username already exists";
-
     if($errors)return $errors;
 
     if(Database::insert('user',[
       'name' => $username,
       'password' => password_hash($password,PASSWORD_DEFAULT)
-    ])){
-      $_SESSION['id']=Database::get('user','id',"name = '".$username."'")['id'];
-      return NULL;
-    }
+    ]))return $this->success($username);
     else{
       return $errors;
     }
-
   }
 
   public function login($data){
@@ -43,8 +35,11 @@ class User{
 
     if(empty($username))$errors[]="Username must not be empty";
     if(empty($password))$errors[]="Password must not be empty";
+    if($errors)return $errors;
 
-    return $errors;
+    if(password_verify($password,
+    Database::get('user','password',"name = '".$username."'")['password']??''))$this->success($username);
+    else{return ['Username or password is incorrect'];}
   }
 
   public function get_user_info(){

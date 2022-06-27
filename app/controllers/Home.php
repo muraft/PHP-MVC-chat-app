@@ -21,7 +21,7 @@ class Home extends Controller{
   public function login(){
     $data['errors']=$_POST?$this->model('User')->login($_POST):[];
     if(isset($_SESSION['id']))header('Location:'.BASEURL);
-    $data['username']=$_POST['name']??'';
+    $data['username']=$_POST['username']??'';
     $data['title']='Log in';
     $this->view('templates/header',$data);
     $this->view('home/login',$data);
@@ -31,5 +31,11 @@ class Home extends Controller{
     unset($_SESSION);
     session_destroy();
     header('Location:'.BASEURL.'/home/login');
+  }
+  public function about(){
+    $data['title']='About';
+    $this->view('templates/header',$data);
+    $this->view('home/about',$data);
+    $this->view('templates/footer');
   }
 }

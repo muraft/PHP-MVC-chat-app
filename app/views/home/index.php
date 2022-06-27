@@ -15,9 +15,9 @@
     <br>
     <a class="btn btn-primary w-75 mt-2"><i class="bi bi-gear"></i> Settings</a>
     <br>
-    <a class="btn btn-primary w-75 mt-2"><i class="bi bi-info-circle"></i> About</a>
+    <a class="btn btn-primary w-75 mt-2" href="<?=BASEURL?>/home/about"><i class="bi bi-info-circle"></i> About</a>
     <br>
-    <a class="btn btn-primary w-75 mt-2" href="home/logout"><i class="bi bi-box-arrow-left"></i> Log out</a>
+    <a class="btn btn-primary w-75 mt-2" href="<?=BASEURL?>/home/logout"><i class="bi bi-box-arrow-left"></i> Log out</a>
   </div>
   <div class="card-footer text-muted text-center">
     By <a href="https://muraft.github.io/" style="text-decoration: none">Muraft</a>
