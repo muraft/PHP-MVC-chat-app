@@ -14,9 +14,20 @@ class Chat extends Controller{
     $this->view('chat/global',$data);
     $this->view('templates/footer');
   }
-  public function get($id=0,$limit=1){
-    if(!isset($_SESSION['id']))header('HTTP/1.0 403 Forbidden');
+  public function get($target_id=0,$limit=1){
+    if(!isset($_SESSION['id'])){
+      header('HTTP/1.0 403 Forbidden');
+      exit();
+    };
     header('Content-Type: application/json; charset=utf-8');
-    echo $this->model('Message')->get($id,$limit);
+    echo $this->model('Message')->get($target_id,$limit);
+  }
+  public function send($target_id=0,$text=''){
+    if(!isset($_SESSION['id'])){
+      header('HTTP/1.0 403 Forbidden');
+      exit();
+    };
+    header('Content-Type: application/json; charset=utf-8');
+    echo $this->model('Message')->send($target_id,$text);
   }
 }
