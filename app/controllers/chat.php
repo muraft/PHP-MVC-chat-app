@@ -14,6 +14,12 @@ class Chat extends Controller{
     $this->view('chat/global',$data);
     $this->view('templates/footer');
   }
+  public function search(){
+    $data['title']='Search User';
+    $this->view('templates/header',$data);
+    $this->view('chat/search',$data);
+    $this->view('templates/footer');
+  }
   public function get($target_id=0,$limit=1){
     if(!isset($_SESSION['id'])){
       header('HTTP/1.0 403 Forbidden');
