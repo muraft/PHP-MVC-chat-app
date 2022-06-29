@@ -38,4 +38,10 @@ class Home extends Controller{
     $this->view('home/about',$data);
     $this->view('templates/footer');
   }
+  public function customize(){
+    $data['title']='Customize';
+    $this->view('templates/header',$data);
+    $this->view('home/customize',$data);
+    $this->view('templates/footer');
+  }
 }

@@ -9,7 +9,7 @@
     <h1 class="card-title text-primary">MuRafT Chat</h1>
     <a href="<?=BASEURL?>/chat" class="btn btn-primary w-75"><i class="bi bi-chat"></i> Chat</a>
     <br>
-    <a class="btn btn-primary w-75 mt-2"><i class="bi bi-palette"></i> Customize</a>
+    <a class="btn btn-primary w-75 mt-2" href="<?=BASEURL?>/home/customize"><i class="bi bi-palette"></i> Customize</a>
     <br>
     <a class="btn btn-primary w-75 mt-2"><i class="bi bi-gear"></i> Settings</a>
     <br>
