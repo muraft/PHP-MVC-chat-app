@@ -28,12 +28,13 @@ class Chat extends Controller{
     header('Content-Type: application/json; charset=utf-8');
     echo $this->model('Message')->get($target_id,$limit);
   }
-  public function send($target_id=0,$text=''){
+  public function send($target_id=0){
     if(!isset($_SESSION['id'])){
       header('HTTP/1.0 403 Forbidden');
       exit();
     };
     header('Content-Type: application/json; charset=utf-8');
-    echo $this->model('Message')->send($target_id,$text);
+    $_POST = json_decode(file_get_contents('php://input'), true);
+    echo $this->model('Message')->send($target_id,$_POST['text']??'');
   }
 }

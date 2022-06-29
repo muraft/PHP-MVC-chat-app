@@ -26,7 +26,7 @@ class App{
 
   public function parseUrl(){
       if(isset($_GET['url'])){
-        return explode('%2F',(rtrim(str_replace('+',' ',filter_var(urlencode($_GET['url']),FILTER_SANITIZE_URL)),'%2F')));
+        return explode("/",(rtrim($_GET['url'],'/')));
       }else{return [];}
   }
 }

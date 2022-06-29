@@ -7,7 +7,7 @@ class Message{
     true));
   }
   public function send($target_id,$text){
-    return ($text!='')?Database::insert('message',[
+    return trim($text)!=''?Database::insert('message',[
       'text'=>$text,
       'sender_id'=>$_SESSION['id'],
       'target_id'=>$target_id

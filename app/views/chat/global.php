@@ -12,6 +12,18 @@
   <button class="bg-transparent border-light rounded text-light" style="width:50px" onclick="send()"><i class="bi bi-send w-25"></i></button>
 </div>
 
+<style>
+/* Hide scrollbar for Chrome, Safari and Opera */
+#messages-container::-webkit-scrollbar {
+display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#messages-container {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+}
+</style>
 <script>
   const msgCont=document.getElementById("messages-container");
   const msgInput=document.getElementById("message-input");
@@ -40,8 +52,13 @@
   setInterval(getMessages,1000);
 
   function send(){
-    fetch("<?=BASEURL?>/chat/send/0/"+encodeURIComponent(msgInput.value.trim()))
-    .then(()=>{
+    fetch("<?=BASEURL?>/chat/send/0",{
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({text:msgInput.value})
+    }).then(()=>{
       msgInput.value="";
       moveToBottom=true;
     });
