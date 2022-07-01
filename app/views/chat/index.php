@@ -4,12 +4,10 @@
   </div>
   <div class="card-body text-center">
     <h1 class="card-title text-primary">Chat</h1>
-    <div class="bg-primary rounded w-50 mx-auto p-1">
-      <h6 class="text-white">Your Profile</h6>
-      <font color="<?=$data['user']['color']?>">
-        <i class="bi bi-<?=$data['user']['icon']?>"></i>
-        <?=$data['user']['name'].'#'.$data['user']['id']?>
-      </font>
+    <div class="rounded w-50 mx-auto p-1 text-white border border-primary" style="background-color: <?=$data['user']['color']?>">
+      <h6>Your Profile</h6>
+      <i class="bi bi-<?=$data['user']['icon']?>"></i>
+      <?=$data['user']['name'].'#'.$data['user']['id']?>
     </div>
     <a class="btn btn-primary w-75 mt-5" href="<?=BASEURL?>/chat/global"><i class="bi bi-globe"></i> Global</a>
     <br>

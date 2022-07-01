@@ -40,6 +40,7 @@ class Home extends Controller{
   }
   public function customize(){
     $data['title']='Customize';
+    $data['user']=$this->model('User')->get_user_info();
     $this->view('templates/header',$data);
     $this->view('home/customize',$data);
     $this->view('templates/footer');

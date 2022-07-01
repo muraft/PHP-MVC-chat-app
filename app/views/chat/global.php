@@ -36,8 +36,8 @@ scrollbar-width: none;  /* Firefox */
       let content="";
       data.forEach(v=>{
         content+= `
-        <div class="border border-primary mt-2 bg-primary rounded p-2 text-white align-self-${v.id==<?=$_SESSION["id"]?>?'end':'start'}" style="word-wrap:break-word;width:auto !important;max-width:75% !important">
-          <small><font color='${v.color}'><i class="bi bi-${v.icon}"></i> ${v.name}</font></small>
+        <div class="mt-2 rounded p-2 text-white align-self-${v.id==<?=$_SESSION["id"]?>?'end':'start'}" style="word-wrap:break-word;width:auto !important;max-width:75% !important;background-color:${v.color}">
+          <small><i class="bi bi-${v.icon}"></i> ${v.name}</small>
           <br>
           ${v.text}
         </div>`;
