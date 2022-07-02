@@ -11,9 +11,9 @@
     </div>
     <form method="post" action="">
       <div class="row overflow-auto border border-primary rounded" style="height: 250px !important;">
-        <div class="col-md-6 col-sm-12 mb-3">
+        <div class="col-md-6 col-sm-12 border border-primary p-2">
           <div class="form-group text-start">
-            <h3 class="text-primary"><i class="bi bi-droplet"></i>Color</h3>
+            <h3 class="text-primary text-center"><i class="bi bi-droplet"></i>Color</h3>
             <div class="radio">
               <label><input type="radio" name="color" value="#0d6efd"> <font color="#0d6efd"><i class="bi bi-square-fill"></i> Blue</font></label>
             </div>
@@ -34,28 +34,28 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-6 col-sm-12 border border-primary p-2">
           <div class="form-group text-start text-primary">
-            <h3><i class="bi bi-stickies"></i>Icon</h3>
+            <h3 class="text-center"><i class="bi bi-stickies"></i>Icon</h3>
             <div class="radio">
-              <label><input type="radio" name="color" value="person-circle"> <i class="bi bi-person-circle"></i> Person</label>
+              <label><input type="radio" name="icon" value="person-circle"> <i class="bi bi-person-circle"></i> Person</label>
             </div>
             <div class="radio">
-              <label><input type="radio" name="color" value="emoji-smile"> <i class="bi bi-emoji-smile"></i> Smile</label>
+              <label><input type="radio" name="icon" value="emoji-smile"> <i class="bi bi-emoji-smile"></i> Smile</label>
             </div>
             <div class="radio">
-              <label><input type="radio" name="color" value="emoji-sunglasses"> <i class="bi bi-emoji-sunglasses"></i> Cool</label>
+              <label><input type="radio" name="icon" value="emoji-sunglasses"> <i class="bi bi-emoji-sunglasses"></i> Cool</label>
             </div>
             <div class="radio">
-              <label><input type="radio" name="color" value="controller"> <i class="bi bi-controller"></i> Controller</label>
+              <label><input type="radio" name="icon" value="controller"> <i class="bi bi-controller"></i> Controller</label>
             </div>
             <div class="radio">
-              <label><input type="radio" name="color" value="phone"> <i class="bi bi-phone"></i> Phone</label>
+              <label><input type="radio" name="icon" value="phone"> <i class="bi bi-phone"></i> Phone</label>
             </div>
           </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary mt-2">Submit</button>
+      <button type="submit" name='submit' class="btn btn-primary mt-2">Submit</button>
     </form>
   </div>
   <div class="card-footer text-muted text-center">

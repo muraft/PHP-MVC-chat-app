@@ -39,6 +39,8 @@ class Home extends Controller{
     $this->view('templates/footer');
   }
   public function customize(){
+    if(!isset($_SESSION['id']))header('Location:home/login');
+    if(isset($_POST['submit']))$this->model('User')->update($_POST);
     $data['title']='Customize';
     $data['user']=$this->model('User')->get_user_info();
     $this->view('templates/header',$data);

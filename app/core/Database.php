@@ -77,4 +77,30 @@ class Database{
     self::execute();
     return self::rowCount();
   }
+
+  public static function update($table,$data,$condition){
+    $column=[];
+    foreach ($data as $key => $value) {
+      $column[]=$key;
+    }
+    $columnArray=[];
+    foreach($column as $c){
+      $columnArray[]=$c.'=:'.$c;
+    }
+    
+    self::query(
+      'UPDATE '
+      .$table.
+      ' SET '.
+      join(',',$columnArray).
+      ' WHERE '.$condition
+    );
+
+    foreach ($column as $c) {
+      self::bind(':'.$c,$data[$c]);
+    }
+
+    self::execute();
+    return self::rowCount();
+  }
 }

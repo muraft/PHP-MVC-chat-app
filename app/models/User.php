@@ -45,4 +45,11 @@ class User{
   public function get_user_info(){
     return Database::get('user','*',"id='".$_SESSION['id']."'");
   }
+
+  public function update($data){
+    Database::update('user',[
+      'color'=>$data['color'],
+      'icon'=>$data['icon']
+    ],'id='.$_SESSION['id']);
+  }
 }
