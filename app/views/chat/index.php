@@ -11,7 +11,7 @@
     </div>
     <a class="btn btn-primary w-75 mt-5" href="<?=BASEURL?>/chat/global"><i class="bi bi-globe"></i> Global</a>
     <br>
-    <a class="btn btn-primary w-75 mt-2" href="<?=BASEURL?>/chat/search"><i class="bi bi-people"></i> Private</a>
+    <a class="btn btn-primary w-75 mt-2" href="<?=BASEURL?>/chat/private"><i class="bi bi-people"></i> Private</a>
   </div>
   <div class="card-footer text-muted text-center">
     By <a href="https://muraft.github.io/" style="text-decoration: none">Muraft</a>

@@ -14,6 +14,18 @@ class Chat extends Controller{
     $this->view('chat/global',$data);
     $this->view('templates/footer');
   }
+  public function private(){
+    $data['title']='Private Chat';
+    $this->view('templates/header',$data);
+    $this->view('chat/private',$data);
+    $this->view('templates/footer');
+  }
+  public function recent(){
+    $data['title']='Recent Messages';
+    $this->view('templates/header',$data);
+    $this->view('chat/recent',$data);
+    $this->view('templates/footer');
+  }
   public function search(){
     $data['title']='Search User';
     $this->view('templates/header',$data);
@@ -24,7 +36,11 @@ class Chat extends Controller{
     if(!isset($_SESSION['id'])){
       header('HTTP/1.0 403 Forbidden');
       exit();
-    };
+    }
+    if($target_id!=0 && $target_id!=$_SESSION['id']){
+      header('HTTP/1.0 403 Forbidden');
+      exit();
+    }
     header('Content-Type: application/json; charset=utf-8');
     echo $this->model('Message')->get($target_id,$limit);
   }
@@ -32,7 +48,7 @@ class Chat extends Controller{
     if(!isset($_SESSION['id'])){
       header('HTTP/1.0 403 Forbidden');
       exit();
-    };
+    }
     header('Content-Type: application/json; charset=utf-8');
     $_POST = json_decode(file_get_contents('php://input'), true);
     echo $this->model('Message')->send($target_id,$_POST['text']??'');

@@ -46,7 +46,8 @@ class User{
     return Database::get('user','*',"id='".$_SESSION['id']."'");
   }
 
-  public function update($data){
+  public function update($data,$existed){
+    if(!in_array($data['color']??'',$existed['color']) || !in_array($data['icon']??'',$existed['icon']))return 0;
     Database::update('user',[
       'color'=>$data['color'],
       'icon'=>$data['icon']

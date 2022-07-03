@@ -40,7 +40,13 @@ class Home extends Controller{
   }
   public function customize(){
     if(!isset($_SESSION['id']))header('Location:home/login');
-    if(isset($_POST['submit']))$this->model('User')->update($_POST);
+    if(isset($_POST['submit'])){
+      $existed=[
+        'color'=>['#0d6efd','red','green','#f5e025','black','#ea25f5'],
+        'icon'=>['person-circle','emoji-smile','emoji-sunglasses','controller','phone']
+      ];
+      $this->model('User')->update($_POST,$existed);
+    }
     $data['title']='Customize';
     $data['user']=$this->model('User')->get_user_info();
     $this->view('templates/header',$data);
