@@ -14,25 +14,13 @@ class Chat extends Controller{
     $this->view('chat/global',$data);
     $this->view('templates/footer');
   }
-  public function private(){
-    $data['title']='Private Chat';
-    $this->view('templates/header',$data);
-    $this->view('chat/private',$data);
-    $this->view('templates/footer');
-  }
-  public function recent(){
-    $data['title']='Recent Messages';
-    $this->view('templates/header',$data);
-    $this->view('chat/recent',$data);
-    $this->view('templates/footer');
-  }
   public function search(){
     $data['title']='Search User';
     $this->view('templates/header',$data);
     $this->view('chat/search',$data);
     $this->view('templates/footer');
   }
-  public function get($target_id=0,$limit=1){
+  public function get($target_id=0,$limit=1,$type='all'){
     if(!isset($_SESSION['id'])){
       header('HTTP/1.0 403 Forbidden');
       exit();
@@ -42,7 +30,7 @@ class Chat extends Controller{
       exit();
     }
     header('Content-Type: application/json; charset=utf-8');
-    echo $this->model('Message')->get($target_id,$limit);
+    echo $type=='recent'?$this->model('Message')->getRecent($target_id,$limit):$this->model('Message')->get($target_id,$limit);
   }
   public function send($target_id=0){
     if(!isset($_SESSION['id'])){
