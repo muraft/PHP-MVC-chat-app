@@ -48,6 +48,12 @@ class Database{
     return self::$statement->rowCount();
   }
 
+  public static function custom($query){
+    self::query($query);
+    self::execute();
+    return self::$statement->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   public static function get($table,$content,$condition,$all=false){
     self::query('SELECT '.$content.' FROM '.$table.' '.($condition?" WHERE ".$condition:"").";");
     self::execute();
@@ -87,7 +93,7 @@ class Database{
     foreach($column as $c){
       $columnArray[]=$c.'=:'.$c;
     }
-    
+
     self::query(
       'UPDATE '
       .$table.

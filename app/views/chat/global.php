@@ -8,7 +8,7 @@
   </div>
 </div>
 <div class="fixed-bottom bg-primary p-2">
-  <input type="text" class="form-control d-inline" id="message-input" placeholder="Type a message..." style="width:calc(100% - 60px) !important"></input>
+  <input type="text" class="form-control d-inline" id="message-input" placeholder="Type a message..." maxlength="255" style="width:calc(100% - 60px) !important"></input>
   <button class="bg-transparent border-light rounded text-light" style="width:50px" onclick="send()"><i class="bi bi-send w-25"></i></button>
 </div>
 
@@ -34,15 +34,15 @@ scrollbar-width: none;  /* Firefox */
     .then(response => response.json())
     .then(data => {
       let content="";
-      data.forEach(v=>{
-        content+= `
-        <div class="mt-2 rounded p-2 text-white align-self-${v.id==<?=$_SESSION["id"]?>?'end':'start'}" style="word-wrap:break-word;width:auto !important;max-width:75% !important;background-color:${v.color}">
-          <small><i class="bi bi-${v.icon}"></i> ${v.name}</small>
+      for(let i=data.length-1;i>=0;i--){
+        content+=`
+        <div class="mt-2 rounded p-2 text-white align-self-${data[i].id==<?=$_SESSION["id"]?>?'end':'start'}" style="word-wrap:break-word;width:auto !important;max-width:75% !important;background-color:${data[i].color}">
+          <small><i class="bi bi-${data[i].icon}"></i> ${data[i].name}</small>
           <br>
-          ${v.text}
+          ${data[i].text}
         </div>`;
-      })
-      msgCont.innerHTML = content;
+      }
+      msgCont.innerHTML=content;
       if(moveToBottom){
         msgCont.scrollTop=msgCont.scrollHeight;
         moveToBottom=false;

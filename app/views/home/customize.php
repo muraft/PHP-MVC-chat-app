@@ -15,7 +15,7 @@
           <div class="form-group text-start">
             <h3 class="text-primary text-center"><i class="bi bi-droplet"></i>Color</h3>
             <div class="radio">
-              <label><input type="radio" name="color" value="#0d6efd"> <font color="#0d6efd"><i class="bi bi-square-fill"></i> Blue</font></label>
+              <label><input type="radio" name="color" value="#0d6efd" required> <font color="#0d6efd"><i class="bi bi-square-fill"></i> Blue</font></label>
             </div>
             <div class="radio">
               <label><input type="radio" name="color" value="red"> <font color="red"><i class="bi bi-square-fill"></i> Red</font></label>
@@ -24,7 +24,7 @@
               <label><input type="radio" name="color" value="green"> <font color="green"><i class="bi bi-square-fill"></i> Green</font></label>
             </div>
             <div class="radio">
-              <label><input type="radio" name="color" value="#f5e025"> <font color="#f5e025"><i class="bi bi-square-fill"> Yellow</i></font></label>
+              <label><input type="radio" name="color" value="#fada0a"> <font color="#fada0a"><i class="bi bi-square-fill"> Yellow</i></font></label>
             </div>
             <div class="radio">
               <label><input type="radio" name="color" value="black"> <font color="black"><i class="bi bi-square-fill"></i> Black</font></label>
@@ -38,7 +38,7 @@
           <div class="form-group text-start text-primary">
             <h3 class="text-center"><i class="bi bi-stickies"></i>Icon</h3>
             <div class="radio">
-              <label><input type="radio" name="icon" value="person-circle"> <i class="bi bi-person-circle"></i> Person</label>
+              <label><input type="radio" name="icon" value="person-circle" required> <i class="bi bi-person-circle"></i> Person</label>
             </div>
             <div class="radio">
               <label><input type="radio" name="icon" value="emoji-smile"> <i class="bi bi-emoji-smile"></i> Smile</label>

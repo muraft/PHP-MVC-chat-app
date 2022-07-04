@@ -50,7 +50,7 @@ class Chat extends Controller{
       exit();
     }
     header('Content-Type: application/json; charset=utf-8');
-    $_POST = json_decode(file_get_contents('php://input'), true);
+    $_POST=json_decode(file_get_contents('php://input'), true);
     echo $this->model('Message')->send($target_id,$_POST['text']??'');
   }
 }

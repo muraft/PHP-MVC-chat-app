@@ -42,7 +42,7 @@ class Home extends Controller{
     if(!isset($_SESSION['id']))header('Location:home/login');
     if(isset($_POST['submit'])){
       $existed=[
-        'color'=>['#0d6efd','red','green','#f5e025','black','#ea25f5'],
+        'color'=>['#0d6efd','red','green','#fada0a','black','#ea25f5'],
         'icon'=>['person-circle','emoji-smile','emoji-sunglasses','controller','phone']
       ];
       $this->model('User')->update($_POST,$existed);
