@@ -1,49 +1,56 @@
-<div class="card w-75 mx-auto mt-2">
-  <div class="card-header">
-    <a class="btn btn-primary" href="<?=BASEURL?>"><i class="bi bi-caret-left"></i></a>
+<div class="position-fixed top-0 w-100 bg-primary text-light p-2 text-center d-flex justify-content-center">
+  <a class="btn btn-primary border-light position-fixed" style="top:6px !important;left:5px !important;" href="<?=BASEURL?>"><i class="bi bi-caret-left"></i></a>
+  <!-- <h3 class="d-inline"><i class="bi bi-chat"></i> MuRafT Chat</h3> -->
+  <div class="rounded w-50 mx-auto p-1 text-white border border-primary" style="background-color: <?=$data['user']['color']?>">
+    <i class="bi bi-<?=$data['user']['icon']?>"></i>
+    <?=$data['user']['name'].'#'.$data['user']['id']?>
   </div>
-  <div class="card-body text-center p-0">
-    <!-- <h3 class="card-title text-primary">Chat</h3> -->
-    <div class="rounded w-50 mx-auto p-1 text-white border border-primary mt-1" style="background-color: <?=$data['user']['color']?>">
-      <i class="bi bi-<?=$data['user']['icon']?>"></i>
-      <?=$data['user']['name'].'#'.$data['user']['id']?>
-    </div>
-    <a class="btn btn-primary w-75 mt-2" href="<?=BASEURL?>/chat/global"><i class="bi bi-globe"></i> Global</a>
-    <a class="btn btn-primary w-75 my-1" href="<?=BASEURL?>/chat/search"><i class="bi bi-search"></i> Search User</a>
-    <div class="container border p-0 w-100 mt-1 d-flex align-items-center flex-column" id="messages-container" style="height: 50vh !important;overflow-y:auto !important;overflow-x:hidden !important;">
-      <div class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Loading...</span>
+  <a class="btn btn-primary border-light position-fixed" style="top:6px !important;right:5px !important;" href="<?=BASEURL?>/chat/search"><i class="bi bi-search"></i></a>
+</div>
+<div class="container-fluid p-0 mt-5 text-center overflow-hidden">
+  <!-- <div class="m-0 p-2 text-white text-start w-100 border border-light bg-primary">
+    <div class="row">
+      <div class="col-3 border-end d-flex justify-content-center align-items-center">
+        <i class="bi bi-globe"></i>
+      </div>
+      <div class="col-9 overflow-hidden">
+        <strong>Global Chat</strong>
       </div>
     </div>
+  </div> -->
+  <a class="btn btn-primary w-75 mt-2" href="<?=BASEURL?>/chat/global"><i class="bi bi-globe"></i> Try global chat here!</a>
+  <div class="container-fluid p-0 mt-2 w-100 d-flex align-items-center flex-column" id="messages-container">
+    <div class="spinner-border text-primary mt-2" role="status">
+    <span class="visually-hidden">Loading...</span>
+    </div>
   </div>
-  <script>
-  const msgCont=document.getElementById("messages-container");
-  function get(){
-    fetch("<?=BASEURL?>/chat/get/<?=$_SESSION['id']?>/100/recent")
-    .then(response => response.json())
-    .then(data => {
-      let content="";
-      data.forEach(v=>{
-        content+=`
-        <div class="m-0 p-2 text-dark text-start w-100 border" style="color: ${v.color} !important;">
-          <div class="row">
-            <div class="col-3 border-end d-flex justify-content-center align-items-center" style="font-size: 35px !important;">
-              <i class="bi bi-${v.icon}"></i>
-            </div>
-            <div class="col-9 overflow-hidden">
-              <strong>${v.name}</strong>
-              <br>
-              <font class="text-muted text-break">${v.text.substring(0,40)+'...'}</font>
-            </div>
-          </div>
-        </div>`;
-      });
-      msgCont.innerHTML=content;
-    })
-  }
-  setInterval(get,2000)
-  </script>
-  <div class="card-footer text-muted text-center">
-    By <a href="https://muraft.github.io/" style="text-decoration: none">Muraft</a>
-  </div>
+  <small class="text-muted">MuRafT chat by <a href="https://muraft.github.io">MuRafT</a></small>
 </div>
+<script>
+const msgCont=document.getElementById("messages-container");
+function get(){
+  fetch("<?=BASEURL?>/chat/get/<?=$_SESSION['id']?>/100/recent")
+  .then(response => response.json())
+  .then(data => {
+    let content="";
+    data.length>0?data.forEach(v=>{
+      content+=`
+      <div class="m-0 p-2 text-dark text-start w-100 border" style="color: ${v.color} !important;">
+        <div class="row">
+          <div class="col-3 border-end d-flex justify-content-center align-items-center" style="font-size: 35px !important;">
+            <i class="bi bi-${v.icon}"></i>
+          </div>
+          <div class="col-9 overflow-hidden">
+            <strong>${v.name}</strong>
+            <br>
+            <font class="text-muted text-break">${v.text.length>40?v.text.substring(0,40)+'...':v.text}</font>
+          </div>
+        </div>
+      </div>`;
+    }):content="<h3 class='text-primary mt-2 border-bottom'><i class='bi bi-emoji-frown'></i><br>You don't have any message</h3>";
+    msgCont.innerHTML=content;
+  })
+}
+get();
+setInterval(get,2000)
+</script>

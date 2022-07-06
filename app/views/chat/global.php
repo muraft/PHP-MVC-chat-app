@@ -1,9 +1,9 @@
-<div class="fixed-top bg-primary text-light p-2 text-center">
-  <a class="btn btn-primary border-light position-fixed" style="top: 4px !important;left: 5px !important;" href="<?=BASEURL?>/chat"><i class="bi bi-caret-left"></i></a>
+<div class="navbar bg-primary text-light p-2 text-center d-flex justify-content-center align-items-center">
+  <a class="btn btn-primary border-light position-fixed" style="top: 6px !important;left: 5px !important;" href="<?=BASEURL?>/chat"><i class="bi bi-caret-left"></i></a>
   <h3 class="d-inline"><i class="bi bi-globe"></i> Global Chat</h3>
 </div>
-<div class="container-fluid d-flex flex-column p-0 overflow-auto" id="messages-container" style="margin-top:60px !important;height:calc(100vh - 120px) !important">
-  <div class="spinner-border text-primary align-self-center" role="status">
+<div class="container-fluid d-flex flex-column px-2 overflow-auto" id="messages-container" style="height:calc(100vh - 120px) !important">
+  <div class="spinner-border text-primary align-self-center mt-2" role="status">
   <span class="visually-hidden">Loading...</span>
   </div>
 </div>
@@ -37,9 +37,9 @@ scrollbar-width: none;  /* Firefox */
       for(let i=data.length-1;i>=0;i--){
         content+=`
         <div class="mt-2 rounded p-2 text-white align-self-${data[i].id==<?=$_SESSION["id"]?>?'end':'start'}" style="word-wrap:break-word;width:auto !important;max-width:75% !important;background-color:${data[i].color}">
-          <small><i class="bi bi-${data[i].icon}"></i> ${data[i].name}</small>
+          <a class="text-light" style="text-decoration:none;" href="<?=BASEURL?>/chat/profile/${data[i].id}"><small><i class="bi bi-${data[i].icon}"></i> ${data[i].name}</small></a>
           <br>
-          ${data[i].text}
+          <div class="border-top border-light">${data[i].text}</div>
         </div>`;
       }
       msgCont.innerHTML=content;
@@ -49,6 +49,7 @@ scrollbar-width: none;  /* Firefox */
       };
     });
   }
+  getMessages();
   setInterval(getMessages,1000);
 
   function send(){

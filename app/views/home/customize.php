@@ -4,8 +4,7 @@
   </div>
   <div class="card-body text-center">
     <h3 class="card-title text-primary"><i class="bi bi-palette"></i> Customize</h3>
-    <div class="rounded w-50 mx-auto p-1 text-white border border-primary mb-3 border-bottom border-primary" style="background-color: <?=$data['user']['color']?>">
-      <h6>Your Profile</h6>
+    <div class="rounded w-75 mx-auto p-1 text-white border border-primary mb-3 border-bottom border-primary" style="background-color: <?=$data['user']['color']?>">
       <i class="bi bi-<?=$data['user']['icon']?>"></i>
       <?=$data['user']['name'].'#'.$data['user']['id']?>
     </div>

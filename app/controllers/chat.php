@@ -9,15 +9,25 @@ class Chat extends Controller{
     $this->view('templates/footer');
   }
   public function global(){
+    if(!isset($_SESSION['id']))header('Location:home/login');
     $data['title']='Global Chat';
     $this->view('templates/header',$data);
     $this->view('chat/global',$data);
     $this->view('templates/footer');
   }
   public function search(){
+    if(!isset($_SESSION['id']))header('Location:home/login');
     $data['title']='Search User';
     $this->view('templates/header',$data);
     $this->view('chat/search',$data);
+    $this->view('templates/footer');
+  }
+  public function profile($id=NULL){
+    if(!isset($_SESSION['id']))header('Location:home/login');
+    $data['user']=$this->model('User')->get_user_info($id);
+    $data['title']='Search User';
+    $this->view('templates/header',$data);
+    $this->view('chat/profile',$data);
     $this->view('templates/footer');
   }
   public function get($target_id=0,$limit=1,$type='all'){

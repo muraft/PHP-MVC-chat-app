@@ -42,8 +42,9 @@ class User{
     else{return ['Username or password is incorrect'];}
   }
 
-  public function get_user_info(){
-    return Database::get('user','*',"id='".$_SESSION['id']."'");
+  public function get_user_info($id=NULL){
+    if($id==NULL)$id=$_SESSION['id'];
+    return Database::get('user','*',"id='".$id."'");
   }
 
   public function update($data,$existed){

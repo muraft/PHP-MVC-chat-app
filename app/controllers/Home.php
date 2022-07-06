@@ -33,6 +33,7 @@ class Home extends Controller{
     header('Location:'.BASEURL.'/home/login');
   }
   public function about(){
+    if(!isset($_SESSION['id']))header('Location:home/login');
     $data['title']='About';
     $this->view('templates/header',$data);
     $this->view('home/about',$data);
