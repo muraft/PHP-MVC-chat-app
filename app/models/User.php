@@ -33,6 +33,8 @@ class User{
     $username=htmlspecialchars($data['username']??'');
     $password=htmlspecialchars($data['password']??'');
 
+    if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/',$username))$errors[]="Username can't contain symbols";
+    if(strlen($username)<3)$errors[]="Username must contain more than 2 characters";
     if(empty($username))$errors[]="Username must not be empty";
     if(empty($password))$errors[]="Password must not be empty";
     if($errors)return $errors;

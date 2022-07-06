@@ -9,7 +9,7 @@
     </div>
     <form method="post" action="">
       <div class="form-floating w-md-50  mb-3 mx-auto">
-      <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?=$data['username']?>" required>
+      <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?=$data['username']?>" maxlength="9" required>
       <label for="username"><i class="bi bi-person"></i> Username</label>
       </div>
 

@@ -8,16 +8,6 @@
   <a class="btn btn-primary border-light position-fixed" style="top:6px !important;right:5px !important;" href="<?=BASEURL?>/chat/search"><i class="bi bi-search"></i></a>
 </div>
 <div class="container-fluid p-0 mt-5 text-center overflow-hidden">
-  <!-- <div class="m-0 p-2 text-white text-start w-100 border border-light bg-primary">
-    <div class="row">
-      <div class="col-3 border-end d-flex justify-content-center align-items-center">
-        <i class="bi bi-globe"></i>
-      </div>
-      <div class="col-9 overflow-hidden">
-        <strong>Global Chat</strong>
-      </div>
-    </div>
-  </div> -->
   <a class="btn btn-primary w-75 mt-2" href="<?=BASEURL?>/chat/global"><i class="bi bi-globe"></i> Try global chat here!</a>
   <div class="container-fluid p-0 mt-2 w-100 d-flex align-items-center flex-column" id="messages-container">
     <div class="spinner-border text-primary mt-2" role="status">

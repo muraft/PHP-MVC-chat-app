@@ -7,7 +7,7 @@ class Message{
     true));
   }
   public function getRecent($target_id,$limit){
-    return json_encode(Database::custom('SELECT user.id,user.name,user.color,user.icon,messages.text FROM user,(SELECT * FROM message WHERE target_id='.$target_id.' GROUP BY sender_id ORDER BY sender_id DESC) as messages WHERE user.id=messages.sender_id ORDER BY messages.id DESC'));
+    return json_encode(Database::custom('SELECT user.id,user.name,user.color,user.icon,messages.text FROM user,(SELECT * FROM message WHERE target_id='.$target_id.' GROUP BY sender_id ORDER BY sender_id DESC LIMIT '.$limit.') as messages WHERE user.id=messages.sender_id ORDER BY messages.id DESC'));
   }
   public function send($target_id,$text){
     return trim($text)!=''?Database::insert('message',[
