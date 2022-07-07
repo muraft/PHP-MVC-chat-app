@@ -11,7 +11,7 @@ class User{
     $password=htmlspecialchars($data['password']??'');
     $password2=htmlspecialchars($data['password2']??'');
 
-    if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/',$username))$errors[]="Username can't contain symbols";
+    if(preg_match('/[^\w]/',$username))$errors[]="Username can't contain symbols";
     if(empty($username))$errors[]="Username must not be empty";
     if(strlen($username)<3)$errors[]="Username must contain more than 2 characters";
     if(empty($password))$errors[]="Password must not be empty";
@@ -33,7 +33,7 @@ class User{
     $username=htmlspecialchars($data['username']??'');
     $password=htmlspecialchars($data['password']??'');
 
-    if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/',$username))$errors[]="Username can't contain symbols";
+    if(preg_match('/[^\w]/',$username))$errors[]="Username can't contain symbols";
     if(strlen($username)<3)$errors[]="Username must contain more than 2 characters";
     if(empty($username))$errors[]="Username must not be empty";
     if(empty($password))$errors[]="Password must not be empty";
@@ -55,5 +55,11 @@ class User{
       'color'=>$data['color'],
       'icon'=>$data['icon']
     ],'id='.$_SESSION['id']);
+  }
+
+  public function find($keyword){
+    preg_replace('/[^\w]/','',$keyword);
+    if(trim($keyword)=='')return '[]';
+    return json_encode(Database::get('user','id,name,color,icon',"id LIKE '%".$keyword."%' OR name LIKE '%".$keyword."%'",true));
   }
 }

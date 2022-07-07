@@ -30,6 +30,14 @@ class Chat extends Controller{
     $this->view('chat/profile',$data);
     $this->view('templates/footer');
   }
+  public function finduser($keyword=''){
+    if(!isset($_SESSION['id'])){
+      header('HTTP/1.0 403 Forbidden');
+      exit();
+    }
+    header('Content-Type: application/json; charset=utf-8');
+    echo $this->model('user')->find($keyword);
+  }
   public function get($target_id=0,$limit=1,$type='all'){
     if(!isset($_SESSION['id'])){
       header('HTTP/1.0 403 Forbidden');
