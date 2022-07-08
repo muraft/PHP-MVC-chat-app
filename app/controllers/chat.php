@@ -8,11 +8,12 @@ class Chat extends Controller{
     $this->view('chat/index',$data);
     $this->view('templates/footer');
   }
-  public function global(){
+  public function room($id=0){
     if(!isset($_SESSION['id']))header('Location:home/login');
-    $data['title']='Global Chat';
+    $data['partner']=$id==0?['id'=>0]:$this->model('User')->get_user_info($id);
+    $data['title']=$id==0?'Global Chat':'Chat with '.$data['partner']['name'];
     $this->view('templates/header',$data);
-    $this->view('chat/global',$data);
+    $this->view('chat/room',$data);
     $this->view('templates/footer');
   }
   public function search(){
@@ -22,10 +23,11 @@ class Chat extends Controller{
     $this->view('chat/search',$data);
     $this->view('templates/footer');
   }
-  public function profile($id=NULL){
+  public function profile($id=NULL,$from=''){
     if(!isset($_SESSION['id']))header('Location:home/login');
     $data['user']=$this->model('User')->get_user_info($id);
     $data['title']='Search User';
+    $data['from']=$from;
     $this->view('templates/header',$data);
     $this->view('chat/profile',$data);
     $this->view('templates/footer');
