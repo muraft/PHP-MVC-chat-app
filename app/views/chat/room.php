@@ -38,7 +38,7 @@ scrollbar-width: none;  /* Firefox */
   let moveToBottom=true;
   document.addEventListener("keydown",e=>e.keyCode==13?send():'');
   function getMessages(){
-    fetch("<?=BASEURL?>/chat/get/<?=$data['partner']['id']?>/100")
+    fetch("<?=BASEURL?>/chat/get/<?=$data['partner']['id']==0?0:$_SESSION['id']?>/100<?=$data['partner']['id']==0?'':'/private/'.$data['partner']['id']?>")
     .then(response => response.json())
     .then(data => {
       let content="";

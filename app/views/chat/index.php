@@ -31,7 +31,7 @@ function get(){
     let content="";
     data.length>0?data.forEach(v=>{
       content+=`
-      <div class="m-0 p-2 text-dark text-start w-100 border message-from">
+      <div class="m-0 p-1 text-dark text-start w-100 border message-from">
       <a href="<?=BASEURL?>/chat/room/${v.id}" style="color: ${v.color} !important;text-decoration: none">
         <div class="row">
           <div class="col-3 border-end d-flex justify-content-center align-items-center" style="font-size: 35px !important;">

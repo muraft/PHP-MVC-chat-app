@@ -40,7 +40,7 @@ class Chat extends Controller{
     header('Content-Type: application/json; charset=utf-8');
     echo $this->model('user')->find($keyword);
   }
-  public function get($target_id=0,$limit=1,$type='all'){
+  public function get($target_id=0,$limit=1,$type='all',$sender_id=false){
     if(!isset($_SESSION['id'])){
       header('HTTP/1.0 403 Forbidden');
       exit();
@@ -50,7 +50,7 @@ class Chat extends Controller{
       exit();
     }
     header('Content-Type: application/json; charset=utf-8');
-    echo $type=='recent'?$this->model('Message')->getRecent($target_id,$limit):$this->model('Message')->get($target_id,$limit);
+    echo $type=='recent'?$this->model('Message')->getRecent($target_id,$limit):$this->model('Message')->get($target_id,$limit,$sender_id);
   }
   public function send($target_id=0){
     if(!isset($_SESSION['id'])){
