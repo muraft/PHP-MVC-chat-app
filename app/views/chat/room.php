@@ -45,7 +45,11 @@ scrollbar-width: none;  /* Firefox */
       for(let i=data.length-1;i>=0;i--){
         content+=`
         <div class="mt-2 rounded p-2 text-white align-self-${data[i].id==<?=$_SESSION["id"]?>?'end':'start'}" style="word-wrap:break-word;width:auto !important;max-width:75% !important;background-color:${data[i].color}">
-          <a class="text-light" style="text-decoration:none;" href="<?=BASEURL?>/chat/profile/${data[i].id}/room"><small><i class="bi bi-${data[i].icon}"></i> ${data[i].name}</small></a>
+          <a class="text-light" style="text-decoration:none;"
+          <?php if($data['partner']['id']==0): ?>
+          href="<?=BASEURL?>/chat/profile/${data[i].id}/room"
+          <?php endif; ?>
+          ><small><i class="bi bi-${data[i].icon}"></i> ${data[i].name}</small></a>
           <br>
           <div class="border-top border-light">${data[i].text}</div>
         </div>`;
@@ -61,7 +65,7 @@ scrollbar-width: none;  /* Firefox */
   setInterval(getMessages,1000);
 
   function send(){
-    fetch("<?=BASEURL?>/chat/send/0",{
+    fetch("<?=BASEURL?>/chat/send/<?=$data['partner']['id']?>",{
       headers: {
         'Content-Type': 'application/json'
       },

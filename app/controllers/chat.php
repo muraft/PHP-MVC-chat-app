@@ -41,6 +41,7 @@ class Chat extends Controller{
     echo $this->model('user')->find($keyword);
   }
   public function get($target_id=0,$limit=1,$type='all',$sender_id=false){
+    $target_id=intval($target_id);
     if(!isset($_SESSION['id'])){
       header('HTTP/1.0 403 Forbidden');
       exit();

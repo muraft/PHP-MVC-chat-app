@@ -3,7 +3,7 @@ class Message{
   public function get($target_id,$limit,$sender_id){
     return json_encode(Database::get('message,user',
     'user.id,user.name,user.icon,user.color,message.text,message.sender_id',
-    'message.target_id='.$target_id.($sender_id?' AND message.sender_id='.$sender_id:'').' AND user.id=message.sender_id ORDER BY message.id DESC LIMIT '.$limit,
+    '((message.target_id='.$target_id.($sender_id?' AND message.sender_id='.$sender_id.') OR (message.sender_id='.$target_id.' AND message.target_id='.$sender_id:'').')) AND user.id=message.sender_id ORDER BY message.id DESC LIMIT '.$limit,
     true));
   }
   public function getRecent($target_id,$limit){
@@ -12,7 +12,7 @@ class Message{
   public function getPrivate($target_id,$limit,$sender_id){
     return json_encode(Database::get('message',
     'text',
-    'target_id='.$target_id.' AND sender_id='.$sender_id.' ORDER BY message.id DESC LIMIT '.$limit,
+    'target_id='.$target_id.' OR sender_id='.$sender_id.' ORDER BY message.id DESC LIMIT '.$limit,
     true));
   }
   public function send($target_id,$text){
