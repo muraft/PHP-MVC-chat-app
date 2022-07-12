@@ -4,9 +4,11 @@
     <?php if($data['partner']['id']==0): ?>
     <i class="bi bi-globe"></i> Global Chat
     <?php else: ?>
+      <a href="<?=BASEURL?>/chat/profile/<?=$data['partner']['id']?>/room/<?=$data['partner']['id']?>" style="text-decoration: none;">
       <div class="rounded mx-auto p-1 text-white border border-primary" style="background-color: <?=$data['partner']['color']?>">
         <i class="bi bi-<?=$data['partner']['icon']?>"></i> <?=$data['partner']['name'].'#'.$data['partner']['id']?>
       </div>
+      </a>
     <?php endif; ?>
   </h3>
 </div>

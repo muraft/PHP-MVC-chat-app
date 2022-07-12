@@ -1,4 +1,4 @@
-<div class="card w-75 mx-auto mt-5">
+<div class="card w-75 mx-auto mt-2">
   <div class="card-header">
     <a class="btn btn-primary" href="<?=BASEURL?>/chat"><i class="bi bi-caret-left"></i></a>
   </div>
