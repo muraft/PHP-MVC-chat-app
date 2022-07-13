@@ -7,13 +7,18 @@ class Message{
     true));
   }
   public function getRecent($target_id,$limit){
-    return json_encode(Database::custom('SELECT user.id,user.name,user.color,user.icon,messages.text FROM user,(SELECT * FROM message WHERE target_id='.$target_id.' GROUP BY sender_id ORDER BY sender_id DESC LIMIT '.$limit.') as messages WHERE user.id=messages.sender_id ORDER BY messages.id DESC'));
-  }
-  public function getPrivate($target_id,$limit,$sender_id){
-    return json_encode(Database::get('message',
-    'text',
-    'target_id='.$target_id.' OR sender_id='.$sender_id.' ORDER BY message.id DESC LIMIT '.$limit,
-    true));
+    return json_encode([
+      'fromOther'=>Database::custom(
+        'SELECT user.id,user.name,user.color,user.icon,messages.text FROM user,
+        (SELECT * FROM message WHERE target_id='.$target_id.' GROUP BY sender_id ORDER BY sender_id DESC LIMIT '.$limit.') as messages
+        WHERE user.id=messages.sender_id ORDER BY messages.id DESC'
+      ),
+      'fromUser'=>Database::custom(
+        'SELECT user.id,user.name,user.color,user.icon,messages.text,messages.id FROM user,
+        (SELECT * FROM message WHERE sender_id='.$_SESSION['id'].' AND target_id<>0 ORDER BY id DESC LIMIT '.$limit.') as messages
+        WHERE user.id=messages.target_id GROUP BY messages.target_id ORDER BY messages.id DESC'
+      )
+    ]);
   }
   public function send($target_id,$text){
     return trim($text)!=''?Database::insert('message',[

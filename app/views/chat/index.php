@@ -29,7 +29,7 @@ function get(){
   .then(response => response.json())
   .then(data => {
     let content="";
-    data.length>0?data.forEach(v=>{
+    data.fromOther.length>0?data.fromOther.forEach(v=>{
       content+=`
       <div class="m-0 p-1 text-dark text-start w-100 border message-from">
       <a href="<?=BASEURL?>/chat/room/${v.id}" style="color: ${v.color} !important;text-decoration: none">

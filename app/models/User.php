@@ -44,6 +44,12 @@ class User{
     else{return ['Username or password is incorrect'];}
   }
 
+  public function logout(){
+    unset($_SESSION);
+    session_destroy();
+    header('Location:'.BASEURL.'/home/login');
+  }
+
   public function get_user_info($id=NULL){
     if($id==NULL)$id=$_SESSION['id'];
     return Database::get('user','*',"id='".$id."'");

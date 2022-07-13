@@ -42,6 +42,7 @@ class Chat extends Controller{
   }
   public function get($target_id=0,$limit=1,$type='all',$sender_id=false){
     $target_id=intval($target_id);
+    $limit=intval($limit);
     if(!isset($_SESSION['id'])){
       header('HTTP/1.0 403 Forbidden');
       exit();

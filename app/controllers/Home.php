@@ -28,9 +28,7 @@ class Home extends Controller{
     $this->view('templates/footer');
   }
   public function logout(){
-    unset($_SESSION);
-    session_destroy();
-    header('Location:'.BASEURL.'/home/login');
+    $this->model('User')->logout();
   }
   public function about(){
     if(!isset($_SESSION['id']))header('Location:home/login');
