@@ -18,7 +18,7 @@
   </div>
 </div>
 <div class="fixed-bottom bg-primary p-2">
-  <input type="text" class="form-control d-inline" id="message-input" placeholder="Type a message..." maxlength="255" style="width:calc(100% - 60px) !important" autofocus></input>
+  <input type="text" class="form-control d-inline" id="message-input" placeholder="Type a message..." maxlength="255" style="width:calc(100% - 60px) !important" autocomplete="off" autofocus></input>
   <button class="bg-transparent border-light rounded text-light" style="width:50px" onclick="send()"><i class="bi bi-send w-25"></i></button>
 </div>
 

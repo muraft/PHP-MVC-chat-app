@@ -48,14 +48,18 @@ function get(){
     let box=new Map();
     data.fromOther.forEach(v=>box.set(v.id,{userId:v.userId,content:createBox(v)}));
     data.fromUser.forEach(v=>{
-      if(Array.from(box.keys()).length)Array.from(box.keys()).forEach(w=>{
-        let x=box.get(w);
-        if(x.userId==v.userId && v.id>w){
-          box.set(v.id,{userId:x.userId,content:createBox(v)});
-          box.delete(w);
-        }
-        else{box.set(v.id,{userId:v.userId,content:createBox(v)})}
-      });
+      console.log(box)
+      if(Array.from(box.keys()).length){
+        console.log(1)
+        Array.from(box.keys()).forEach(w=>{
+          let x=box.get(w);
+          if(x.userId==v.userId && v.id>=w){
+            box.set(v.id,{userId:x.userId,content:createBox(v)});
+            box.delete(w);
+          }
+          else{console.log(v.id,w);box.set(v.id,{userId:v.userId,content:createBox(v)})}
+        });
+      }
       else{box.set(v.id,{userId:v.userId,content:createBox(v)})}
     });
     msgCont.innerHTML=Array.from(box.keys()).length?Array.from(box.keys()).sort().reverse().map(v=>box.get(v).content).join(''):
@@ -63,5 +67,5 @@ function get(){
   })
 }
 get();
-setInterval(get,2000)
+//setInterval(get,2000)
 </script>
