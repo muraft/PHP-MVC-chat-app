@@ -20,7 +20,7 @@ const result=document.getElementById('result');
     .then(data => {
       let content='';
       data.forEach(v=>{
-        content+=`<li class="list-group-item"><a href="<?=BASEURL?>/chat/profile/${v.id}/search"  style="color:${v.color} !important;text-decoration:none;"><i class="bi bi-${v.icon}" ></i> ${v.name+'#'+v.id}</a></li>`;
+        content+=`<li class="list-group-item"><a href="<?=BASEURL?>/chat/profile/${v.id}/chat-search"  style="color:${v.color} !important;text-decoration:none;"><i class="bi bi-${v.icon}" ></i> ${v.name+'#'+v.id}</a></li>`;
       })
       result.innerHTML=content;
     })

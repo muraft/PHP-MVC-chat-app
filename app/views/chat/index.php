@@ -1,9 +1,10 @@
 <div class="position-fixed top-0 w-100 bg-primary text-light p-2 text-center d-flex justify-content-center">
   <a class="btn btn-primary border-light position-fixed" style="top:6px !important;left:5px !important;" href="<?=BASEURL?>"><i class="bi bi-caret-left"></i></a>
-  <!-- <h3 class="d-inline"><i class="bi bi-chat"></i> MuRafT Chat</h3> -->
   <div class="rounded w-50 mx-auto p-1 text-white border border-primary" style="background-color: <?=$data['user']['color']?>">
+    <a href="<?=BASEURL?>/chat/profile/<?=$_SESSION['id']?>" class="text-white" style="text-decoration: none;">
     <i class="bi bi-<?=$data['user']['icon']?>"></i>
     <?=$data['user']['name'].'#'.$data['user']['id']?>
+    </a>
   </div>
   <a class="btn btn-primary border-light position-fixed" style="top:6px !important;right:5px !important;" href="<?=BASEURL?>/chat/search"><i class="bi bi-search"></i></a>
 </div>
@@ -50,14 +51,12 @@ function get(){
     data.fromUser.forEach(v=>{
       console.log(box)
       if(Array.from(box.keys()).length){
-        console.log(1)
         Array.from(box.keys()).forEach(w=>{
           let x=box.get(w);
           if(x.userId==v.userId && v.id>=w){
             box.set(v.id,{userId:x.userId,content:createBox(v)});
             box.delete(w);
           }
-          else{console.log(v.id,w);box.set(v.id,{userId:v.userId,content:createBox(v)})}
         });
       }
       else{box.set(v.id,{userId:v.userId,content:createBox(v)})}
@@ -67,5 +66,5 @@ function get(){
   })
 }
 get();
-//setInterval(get,2000)
+setInterval(get,2000)
 </script>

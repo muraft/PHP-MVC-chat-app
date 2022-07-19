@@ -1,12 +1,13 @@
 <div class="card w-75 mx-auto mt-5">
   <div class="card-header text-primary">
-      <a class="btn btn-primary" href="<?=BASEURL?>/chat/<?=$data['from']?>"><i class="bi bi-caret-left"></i></a>
+      <a class="btn btn-primary" href="<?=BASEURL?>/<?=$data['from']?>"><i class="bi bi-caret-left"></i></a>
   </div>
   <div class="card-body text-center">
     <h3 class="card-title text-primary"><i class="bi bi-person-circle"></i> User Profile</h3>
     <?php if($data['user']): ?>
     <ul class="list-group text-start text-dark">
       <li class="list-group-item text-white" style="background-color:<?=$data['user']['color']?> !important;"><i class="bi bi-<?=$data['user']['icon']?>"></i> <?=$data['user']['name']?></li>
+      <li class="list-group-item text-center"><?=$data['user']['description']?></li>
       <li class="list-group-item"><strong style="color:<?=$data['user']['color']?>">ID:</strong> <?=$data['user']['id']?></li>
       <li class="list-group-item"><strong style="color:<?=$data['user']['color']?>">Date created (UTC+7):</strong> <?=$data['user']['date_created']?></li>
     </ul>

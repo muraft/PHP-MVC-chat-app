@@ -4,7 +4,7 @@
     <?php if($data['partner']['id']==0): ?>
     <i class="bi bi-globe"></i> Global Chat
     <?php else: ?>
-      <a href="<?=BASEURL?>/chat/profile/<?=$data['partner']['id']?>/room/<?=$data['partner']['id']?>" style="text-decoration: none;">
+      <a href="<?=BASEURL?>/chat/profile/<?=$data['partner']['id']?>/chat-room-<?=$data['partner']['id']?>" style="text-decoration: none;">
       <div class="rounded mx-auto p-1 text-white border border-primary" style="background-color: <?=$data['partner']['color']?>">
         <i class="bi bi-<?=$data['partner']['icon']?>"></i> <?=$data['partner']['name'].'#'.$data['partner']['id']?>
       </div>
@@ -49,7 +49,7 @@ scrollbar-width: none;  /* Firefox */
         <div class="mt-2 rounded p-2 text-white align-self-${data[i].id==<?=$_SESSION["id"]?>?'end':'start'}" style="word-wrap:break-word;width:auto !important;max-width:75% !important;background-color:${data[i].color}">
           <a class="text-light" style="text-decoration:none;"
           <?php if($data['partner']['id']==0): ?>
-          href="<?=BASEURL?>/chat/profile/${data[i].id}/room"
+          href="<?=BASEURL?>/chat/profile/${data[i].id}/chat-room"
           <?php endif; ?>
           ><small><i class="bi bi-${data[i].icon}"></i> ${data[i].name}</small></a>
           <br>

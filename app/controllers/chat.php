@@ -23,11 +23,11 @@ class Chat extends Controller{
     $this->view('chat/search',$data);
     $this->view('templates/footer');
   }
-  public function profile($id=NULL,$from='',$from_id=0){
+  public function profile($id=NULL,$from=''){
     if(!isset($_SESSION['id']))header('Location:home/login');
     $data['user']=$this->model('User')->get_user_info($id);
     $data['title']='Search User';
-    $data['from']=$from.'/'.$from_id;
+    $data['from']=str_replace('-','/',$from);
     $this->view('templates/header',$data);
     $this->view('chat/profile',$data);
     $this->view('templates/footer');

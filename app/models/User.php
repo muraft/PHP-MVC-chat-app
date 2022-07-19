@@ -11,10 +11,11 @@ class User{
     $password=htmlspecialchars($data['password']??'');
     $password2=htmlspecialchars($data['password2']??'');
 
-    if(preg_match('/[^\w]/',$username))$errors[]="Username can't contain symbols";
+    if(preg_match('/[^\w]/',$username))$errors[]="Username can't contain symbols and space";
     if(empty($username))$errors[]="Username must not be empty";
-    if(strlen($username)<3)$errors[]="Username must contain more than 2 characters";
+    if(strlen(trim($username))<3)$errors[]="Username must contain more than 2 characters";
     if(empty($password))$errors[]="Password must not be empty";
+    if(strlen(trim($password))<9)$errors[]="Password must contain eight or more characters";
     if($password!==$password2)$errors[]="Password does not match";
     if(count(Database::get('user','*',"name='".$username."' LIMIT 1",true)))$errors[]="Username already exists";
     if($errors)return $errors;
