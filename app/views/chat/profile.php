@@ -7,7 +7,12 @@
     <?php if($data['user']): ?>
     <ul class="list-group text-start text-dark">
       <li class="list-group-item text-white" style="background-color:<?=$data['user']['color']?> !important;"><i class="bi bi-<?=$data['user']['icon']?>"></i> <?=$data['user']['name']?></li>
-      <li class="list-group-item text-center"><?=$data['user']['description']?></li>
+      <li class="list-group-item text-center">
+        <form method="POST" action="">
+        <textarea name="description" class="form-control" maxlength="255" style="resize:none;" <?=$data['user']['id']!=$_SESSION['id']?'readonly':''?>><?=$data['user']['description']?></textarea>
+        <button type="submit" name="update" class="btn btn-primary w-auto mt-2 <?=$data['user']['id']!=$_SESSION['id']?'d-none':''?>"><i class="bi bi-pencil-square"></i> Update description</button>
+        </form>
+      </li>
       <li class="list-group-item"><strong style="color:<?=$data['user']['color']?>">ID:</strong> <?=$data['user']['id']?></li>
       <li class="list-group-item"><strong style="color:<?=$data['user']['color']?>">Date created (UTC+7):</strong> <?=$data['user']['date_created']?></li>
     </ul>

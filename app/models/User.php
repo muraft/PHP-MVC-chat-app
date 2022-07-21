@@ -15,7 +15,7 @@ class User{
     if(empty($username))$errors[]="Username must not be empty";
     if(strlen(trim($username))<3)$errors[]="Username must contain more than 2 characters";
     if(empty($password))$errors[]="Password must not be empty";
-    if(strlen(trim($password))<9)$errors[]="Password must contain eight or more characters";
+    if(strlen(trim($password))<8)$errors[]="Password must contain eight or more characters";
     if($password!==$password2)$errors[]="Password does not match";
     if(count(Database::get('user','*',"name='".$username."' LIMIT 1",true)))$errors[]="Username already exists";
     if($errors)return $errors;
