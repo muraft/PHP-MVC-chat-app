@@ -61,6 +61,7 @@ scrollbar-width: none;  /* Firefox */
         msgCont.scrollTop=msgCont.scrollHeight;
         moveToBottom=false;
       };
+      if(<?=$data['partner']['id']?>!=0)fetch("<?=BASEURL?>/chat/read/<?=$data['partner']['id']?>");
     });
   }
   getMessages();

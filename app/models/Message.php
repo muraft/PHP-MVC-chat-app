@@ -22,9 +22,12 @@ class Message{
   }
   public function send($target_id,$text){
     return trim($text)!=''?Database::insert('message',[
-      'text'=>htmlspecialchars($text),
+      'text'=>htmlspecialchars(trim($text)),
       'sender_id'=>$_SESSION['id'],
       'target_id'=>$target_id
     ]):'';
+  }
+  public function read($id){
+    Database::update('message',['is_read'=>true],'sender_id='.$id.' AND target_id='.$_SESSION['id']);
   }
 }
