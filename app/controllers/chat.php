@@ -25,7 +25,9 @@ class Chat extends Controller{
   }
   public function profile($id=NULL,$from=''){
     if(!isset($_SESSION['id']))header('Location:home/login');
-    $data['user']=$this->model('User')->get_user_info($id);
+    $user=$this->model('User');
+    $data['user']=$user->get_user_info($id);
+    if(isset($_POST['update']) && $id==$_SESSION['id'])$data['user']['description']=$user->update($_POST['description']);
     $data['title']='Search User';
     $data['from']=str_replace('-','/',$from);
     $this->view('templates/header',$data);

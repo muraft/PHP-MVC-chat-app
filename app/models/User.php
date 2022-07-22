@@ -15,7 +15,7 @@ class User{
     if(empty($username))$errors[]="Username must not be empty";
     if(strlen(trim($username))<3)$errors[]="Username must contain more than 2 characters";
     if(empty($password))$errors[]="Password must not be empty";
-    if(strlen(trim($password))<8)$errors[]="Password must contain eight or more characters";
+    if(strlen($password)<8)$errors[]="Password must contain eight or more characters";
     if($password!==$password2)$errors[]="Password does not match";
     if(count(Database::get('user','*',"name='".$username."' LIMIT 1",true)))$errors[]="Username already exists";
     if($errors)return $errors;
@@ -56,12 +56,18 @@ class User{
     return Database::get('user','*',"id='".$id."'");
   }
 
-  public function update($data,$existed){
-    if(!in_array($data['color']??'',$existed['color']) || !in_array($data['icon']??'',$existed['icon']))return 0;
-    Database::update('user',[
-      'color'=>$data['color'],
-      'icon'=>$data['icon']
-    ],'id='.$_SESSION['id']);
+  public function update($data,$existed=NULL){
+    if($existed){
+      if(!in_array($data['color']??'',$existed['color']) || !in_array($data['icon']??'',$existed['icon']))return 0;
+      Database::update('user',[
+        'color'=>$data['color'],
+        'icon'=>$data['icon'],
+      ],'id='.$_SESSION['id']);
+    }
+    else{
+      Database::update('user',['description'=>$data],'id='.$_SESSION['id']);
+      return $data;
+    }
   }
 
   public function find($keyword){
